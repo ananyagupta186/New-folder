@@ -341,3 +341,119 @@ input[type="text"], input[type="number"], input[type="date"], select {
         right: 5%;
     }
 }
+/* ... (existing CSS) ... */
+
+#chatbot-mic-button {
+    background-color: #f1f1f1;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    flex-shrink: 0;
+}
+
+#chatbot-mic-button:hover {
+    background-color: #e0e0e0;
+}
+
+#chatbot-mic-button.listening {
+    animation: pulse-mic 1s infinite;
+}
+
+@keyframes pulse-mic {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+// --- Voice Assistant Logic ---
+const micButton = document.getElementById('chatbot-mic-button');
+const chatbotInput = document.getElementById('chatbot-input-field');
+
+let isListening = false;
+let recognition;
+let synth = window.speechSynthesis;
+
+// Check if the browser supports the Web Speech API
+if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+    recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = 'en-US'; // You can change this to a preferred language
+
+    // Start listening
+    micButton.addEventListener('click', () => {
+        if (!isListening) {
+            recognition.start();
+        }
+    });
+
+    // When the speech recognition starts
+    recognition.onstart = () => {
+        isListening = true;
+        micButton.classList.add('listening');
+        chatbotInput.placeholder = 'Listening...';
+    };
+
+    // When a result is received
+    recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        chatbotInput.value = transcript;
+        sendMessage(); // Automatically send the message
+    };
+
+    // When recognition ends
+    recognition.onend = () => {
+        isListening = false;
+        micButton.classList.remove('listening');
+        chatbotInput.placeholder = 'Type your message...';
+    };
+
+    // Handle errors
+    recognition.onerror = (event) => {
+        console.error('Speech recognition error:', event.error);
+        isListening = false;
+        micButton.classList.remove('listening');
+        chatbotInput.placeholder = 'Type your message...';
+        alert(`Voice recognition error: ${event.error}. Please try again.`);
+    };
+
+} else {
+    // If the browser does not support the API, hide the button
+    micButton.style.display = 'none';
+    console.warn('Web Speech API is not supported in this browser.');
+}
+
+
+// Function to speak the bot's response
+function speakBotResponse(text) {
+    if (synth && text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US'; // Set language for TTS
+        synth.speak(utterance);
+    }
+}
+
+// Modify the addMessage function to speak the bot's response
+function addMessage(message, sender) {
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('message');
+
+    if (sender === 'user') {
+        messageDiv.classList.add('user-message');
+        messageDiv.textContent = message;
+    } else {
+        const botText = translations[languageSwitcher.value][message];
+        messageDiv.classList.add('bot-message');
+        messageDiv.innerHTML = botText; // Use innerHTML to handle bolded text
+
+        // Speak the bot's response
+        speakBotResponse(botText);
+    }
+    
+    chatbotMessages.appendChild(messageDiv);
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+}

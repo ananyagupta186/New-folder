@@ -772,4 +772,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    /* ... (existing CSS) ... */
+
+#chatbot-mic-button {
+    background-color: #f1f1f1;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    flex-shrink: 0;
+}
+
+#chatbot-mic-button:hover {
+    background-color: #e0e0e0;
+}
+
+#chatbot-mic-button.listening {
+    animation: pulse-mic 1s infinite;
+}
+
+@keyframes pulse-mic {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
 });
