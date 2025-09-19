@@ -34,166 +34,139 @@
 
     <main>
         <section id="home" class="page-section active">
-            <div class="content">
+            <div class="hero-content">
                 <h1 data-lang-key="home_title">AI-Powered Crop Yield Prediction</h1>
-                <p data-lang-key="home_description_1">
-                    Welcome to **Crop Mitra**, your intelligent partner in farming. Our platform leverages the power of AI to provide accurate crop yield predictions, helping you make informed decisions for a more productive harvest.
-                </p>
-                <p data-lang-key="home_description_2">
-                    By analyzing key factors like soil type, farm size, and weather patterns, we empower farmers with data-driven insights to maximize their yield and optimize resource usage. Let's grow together!
-                </p>
-                <button onclick="window.location.hash = '#input'" data-lang-key="home_button">Get Started</button>
+                <p class="intro-text" data-lang-key="home_description_1">Welcome to **Crop Mitra**, your intelligent partner in farming. Our platform leverages the power of AI to provide accurate crop yield predictions, helping you make informed decisions for a more productive harvest.</p>
+                <p class="intro-text" data-lang-key="home_description_2">By analyzing key factors like soil type, farm size, and weather patterns, we empower farmers with data-driven insights to maximize their yield and optimize resource usage. Let's grow together!</p>
+                <a href="#input" class="cta-button" data-lang-key="home_button">Get Started</a>
             </div>
         </section>
 
         <section id="input" class="page-section">
-            <div class="content form-container">
-                <h2 data-lang-key="input_title">Enter Farm Details</h2>
-                <form id="yield-form">
-                    <div class="form-group">
-                        <label for="location" data-lang-key="form_label_location">Farm Location</label>
-                        <div class="input-with-button">
-                            <input type="text" id="location" required>
-                            <button type="button" id="gps-button" data-lang-key="form_button_gps">Use GPS</button>
-                        </div>
+            <h2 data-lang-key="input_title">Enter Farm Details</h2>
+            <form id="yield-form">
+                <div class="form-group">
+                    <label for="location" data-lang-key="form_label_location">Farm Location</label>
+                    <div class="input-with-button">
+                        <input type="text" id="location" name="location" required>
+                        <button type="button" id="gps-button" class="form-button" data-lang-key="form_button_gps">Use GPS</button>
                     </div>
-
-                    <div class="form-group">
-                        <label for="farm_size" data-lang-key="form_label_size">Farm Size</label>
-                        <div class="input-with-select">
-                            <input type="number" id="farm_size" min="0" required>
-                            <select id="size_unit">
-                                <option value="acres" data-lang-key="unit_acres">Acres</option>
-                                <option value="hectares" data-lang-key="unit_hectares">Hectares</option>
-                                <option value="sq_m" data-lang-key="unit_sq_m">Sq. Meters</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label data-lang-key="form_label_soil_known">Do you know the soil type?</label>
-                        <div class="radio-group">
-                            <input type="radio" id="soil_known_yes" name="soil_known" value="yes" required>
-                            <label for="soil_known_yes" data-lang-key="form_label_yes">Yes</label>
-                            <input type="radio" id="soil_known_no" name="soil_known" value="no">
-                            <label for="soil_known_no" data-lang-key="form_label_no">No</label>
-                        </div>
-                    </div>
-
-                    <div id="soil-known-fields" class="form-group hidden">
-                        <label for="soil_type" data-lang-key="form_label_soil_type">Soil Type</label>
-                        <select id="soil_type">
-                            <option value="" data-lang-key="form_option_select">Select a soil type</option>
-                            <option value="clay" data-lang-key="soil_clay">Clay</option>
-                            <option value="sandy" data-lang-key="soil_sandy">Sandy</option>
-                            <option value="loamy" data-lang-key="soil_loamy">Loamy</option>
-                            <option value="silty" data-lang-key="soil_silty">Silty</option>
-                            <option value="chalky" data-lang-key="soil_chalky">Chalky</option>
-                            <option value="peaty" data-lang-key="soil_peaty">Peaty</option>
+                </div>
+                <div class="form-group">
+                    <label for="farm_size" data-lang-key="form_label_size">Farm Size</label>
+                    <div class="input-with-select">
+                        <input type="number" id="farm_size" name="farm_size" min="0" required>
+                        <select id="size_unit" name="size_unit">
+                            <option value="acres" data-lang-key="unit_acres">Acres</option>
+                            <option value="hectares" data-lang-key="unit_hectares">Hectares</option>
+                            <option value="sq_m" data-lang-key="unit_sq_m">Sq. Meters</option>
                         </select>
                     </div>
-
-                    <div id="soil-unknown-fields" class="form-group hidden">
-                        <div class="form-group">
-                            <label for="soil_color" data-lang-key="form_label_soil_color">Soil Color</label>
-                            <select id="soil_color">
-                                <option value="" data-lang-key="form_option_select">Select a color</option>
-                                <option value="black" data-lang-key="color_black">Black</option>
-                                <option value="brown" data-lang-key="color_brown">Brown</option>
-                                <option value="red" data-lang-key="color_red">Red</option>
-                                <option value="yellow" data-lang-key="color_yellow">Yellow</option>
-                                <option value="grey" data-lang-key="color_grey">Grey</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="absorption_rate" data-lang-key="form_label_absorption">Absorption Rate</label>
-                            <select id="absorption_rate">
-                                <option value="" data-lang-key="form_option_select">Select rate</option>
-                                <option value="high" data-lang-key="rate_high">High</option>
-                                <option value="medium" data-lang-key="rate_medium">Medium</option>
-                                <option value="low" data-lang-key="rate_low">Low</option>
-                            </select>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label data-lang-key="form_label_soil_known">Do you know the soil type?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="soil_known" value="yes" checked> <span data-lang-key="form_label_yes">Yes</span></label>
+                        <label><input type="radio" name="soil_known" value="no"> <span data-lang-key="form_label_no">No</span></label>
                     </div>
-
-                    <div class="form-group">
-                        <label for="seed_type" data-lang-key="form_label_seed">Seed Type / Crop</label>
-                        <input type="text" id="seed_type" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="sowing_date" data-lang-key="form_label_date">Sowing Date</label>
-                        <input type="date" id="sowing_date" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="irrigation_method" data-lang-key="form_label_irrigation">Irrigation Method</label>
-                        <select id="irrigation_method" required>
-                            <option value="" data-lang-key="form_option_select">Select method</option>
-                            <option value="drip" data-lang-key="method_drip">Drip Irrigation</option>
-                            <option value="sprinkler" data-lang-key="method_sprinkler">Sprinkler Irrigation</option>
-                            <option value="flood" data-lang-key="method_flood">Flood Irrigation</option>
-                        </select>
-                    </div>
-
-                    <button type="submit" data-lang-key="form_button_predict">Predict Yield</button>
-                </form>
-            </div>
+                </div>
+                <div id="soil-known-fields" class="form-group">
+                    <label for="soil_type" data-lang-key="form_label_soil_type">Soil Type</label>
+                    <select id="soil_type" name="soil_type">
+                        <option value="" data-lang-key="form_option_select">Select...</option>
+                        <option value="clay" data-lang-key="soil_clay">Clay</option>
+                        <option value="sandy" data-lang-key="soil_sandy">Sandy</option>
+                        <option value="loamy" data-lang-key="soil_loamy">Loamy</option>
+                        <option value="silty" data-lang-key="soil_silty">Silty</option>
+                        <option value="chalky" data-lang-key="soil_chalky">Chalky</option>
+                        <option value="peaty" data-lang-key="soil_peaty">Peaty</option>
+                    </select>
+                </div>
+                <div id="soil-unknown-fields" class="form-group hidden">
+                    <label for="soil_color" data-lang-key="form_label_soil_color">Soil Color</label>
+                    <select id="soil_color" name="soil_color">
+                        <option value="" data-lang-key="form_option_select">Select...</option>
+                        <option value="black" data-lang-key="color_black">Black</option>
+                        <option value="brown" data-lang-key="color_brown">Brown</option>
+                        <option value="red" data-lang-key="color_red">Red</option>
+                        <option value="yellow" data-lang-key="color_yellow">Yellow</option>
+                        <option value="grey" data-lang-key="color_grey">Grey</option>
+                    </select>
+                    <label for="absorption_rate" data-lang-key="form_label_absorption">Absorption Rate</label>
+                    <select id="absorption_rate" name="absorption_rate">
+                        <option value="" data-lang-key="form_option_select">Select...</option>
+                        <option value="high" data-lang-key="rate_high">High</option>
+                        <option value="medium" data-lang-key="rate_medium">Medium</option>
+                        <option value="low" data-lang-key="rate_low">Low</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="seed_type" data-lang-key="form_label_seed">Seed Type / Crop</label>
+                    <input type="text" id="seed_type" name="seed_type" required>
+                </div>
+                <div class="form-group">
+                    <label for="sowing_date" data-lang-key="form_label_date">Sowing Date</label>
+                    <input type="date" id="sowing_date" name="sowing_date" required>
+                </div>
+                <div class="form-group">
+                    <label for="irrigation" data-lang-key="form_label_irrigation">Irrigation Method</label>
+                    <select id="irrigation" name="irrigation" required>
+                        <option value="" data-lang-key="form_option_select">Select...</option>
+                        <option value="drip" data-lang-key="method_drip">Drip Irrigation</option>
+                        <option value="sprinkler" data-lang-key="method_sprinkler">Sprinkler Irrigation</option>
+                        <option value="flood" data-lang-key="method_flood">Flood Irrigation</option>
+                    </select>
+                </div>
+                <button type="submit" class="form-button" data-lang-key="form_button_predict">Predict Yield</button>
+            </form>
         </section>
 
         <section id="dashboard" class="page-section">
-            <div class="content dashboard-container">
-                <h2 data-lang-key="dashboard_title">Prediction Dashboard</h2>
-                <div id="prediction-results" class="results-box hidden">
+            <h2 data-lang-key="dashboard_title">Prediction Dashboard</h2>
+            <div id="prediction-results" class="hidden">
+                <div class="result-card">
                     <h3 data-lang-key="yield_heading">Expected Yield</h3>
-                    <p class="yield-text"><span id="predicted_yield">0</span> <span data-lang-key="yield_unit">kg</span></p>
-                    <hr>
+                    <p class="yield-value"><span id="predicted_yield">0</span> <span data-lang-key="yield_unit">kg</span></p>
+                </div>
+                <div class="result-card">
                     <h3 data-lang-key="tips_heading">Resource Optimization Tips</h3>
-                    <ul id="optimization_tips">
+                    <ul>
                         <li data-lang-key="tip_1">Use organic fertilizers to improve soil health.</li>
                         <li data-lang-key="tip_2">Install a drip irrigation system to save water.</li>
                         <li data-lang-key="tip_3">Monitor local weather forecasts for timely actions.</li>
                     </ul>
                 </div>
-                <div class="chart-container">
-                    <h3 data-lang-key="analysis_heading">Yield Analysis Graph</h3>
-                    <canvas id="yieldChart"></canvas>
-                </div>
+            </div>
+            <div class="chart-container">
+                <h3 data-lang-key="analysis_heading">Yield Analysis Graph</h3>
+                <canvas id="yieldChart"></canvas>
             </div>
         </section>
 
         <section id="knowledge" class="page-section">
-            <div class="content knowledge-container">
-                <h2 data-lang-key="knowledge_title">Knowledge Hub</h2>
+            <h2 data-lang-key="knowledge_title">Knowledge Hub</h2>
+            <div class="knowledge-grid">
                 <div class="knowledge-card">
                     <h3 data-lang-key="kh_card1_title">Understanding Soil Health</h3>
-                    <p data-lang-key="kh_card1_text">
-                        Healthy soil is the foundation of a good harvest. Soil health refers to its ability to function as a living ecosystem to sustain plants, animals, and humans. Factors like soil type, pH levels, and nutrient content are crucial. Regular soil testing helps identify deficiencies and enables targeted fertilization.
-                    </p>
+                    <p data-lang-key="kh_card1_text">Healthy soil is the foundation of a good harvest. Soil health refers to its ability to function as a living ecosystem to sustain plants, animals, and humans. Factors like soil type, pH levels, and nutrient content are crucial. Regular soil testing helps identify deficiencies and enables targeted fertilization.</p>
                 </div>
                 <div class="knowledge-card">
                     <h3 data-lang-key="kh_card2_title">The Importance of Timely Sowing</h3>
-                    <p data-lang-key="kh_card2_text">
-                        Sowing your seeds at the right time is critical for optimal growth. The ideal sowing date depends on local climate, crop type, and soil conditions. Sowing too early or too late can expose young plants to unfavorable weather, pests, or diseases, reducing the overall yield.
-                    </p>
+                    <p data-lang-key="kh_card2_text">Sowing your seeds at the right time is critical for optimal growth. The ideal sowing date depends on local climate, crop type, and soil conditions. Sowing too early or too late can expose young plants to unfavorable weather, pests, or diseases, reducing the overall yield.</p>
                 </div>
                 <div class="knowledge-card">
                     <h3 data-lang-key="kh_card3_title">Efficient Irrigation Methods</h3>
-                    <p data-lang-key="kh_card3_text">
-                        Choosing the right irrigation method can significantly save water and improve crop productivity. **Drip irrigation** delivers water directly to the plant roots, minimizing waste. **Sprinkler systems** are efficient for larger fields, while **flood irrigation** is a traditional but water-intensive method.
-                    </p>
+                    <p data-lang-key="kh_card3_text">Choosing the right irrigation method can significantly save water and improve crop productivity. **Drip irrigation** delivers water directly to the plant roots, minimizing waste. **Sprinkler systems** are efficient for larger fields, while **flood irrigation** is a traditional but water-intensive method.</p>
                 </div>
             </div>
         </section>
 
         <section id="contact" class="page-section">
-            <div class="content contact-container">
-                <h2 data-lang-key="contact_title">Contact Us</h2>
-                <div class="contact-info">
-                    <p data-lang-key="contact_info_text">For any queries, please reach out to **Team Crop Mitra**.</p>
-                    <p><strong data-lang-key="contact_email_label">Email:</strong> <a href="mailto:contact@cropmitra.com">contact@cropmitra.com</a></p>
-                    <p><strong data-lang-key="contact_phone_label">Phone:</strong> +91-1234567890</p>
-                </div>
+            <h2 data-lang-key="contact_title">Contact Us</h2>
+            <div class="contact-info">
+                <p data-lang-key="contact_info_text">For any queries, please reach out to **Team Crop Mitra**.</p>
+                <p><strong data-lang-key="contact_email_label">Email:</strong> <a href="mailto:contact@cropmitra.com">contact@cropmitra.com</a></p>
+                <p><strong data-lang-key="contact_phone_label">Phone:</strong> +91-1234567890</p>
             </div>
         </section>
     </main>
@@ -211,13 +184,9 @@
             <div class="chatbot-input">
                 <input type="text" id="chatbot-input-field" placeholder="Type your message..." data-lang-key="chatbot_input_placeholder">
                 <button id="chatbot-send-button" data-lang-key="chatbot_send">Send</button>
+                <button id="voice-assistant-toggle" class="voice-assistant-button">🎤</button>
             </div>
         </div>
-    </div>
-    <div class="chatbot-input">
-    <input type="text" id="chatbot-input-field" placeholder="Type your message..." data-lang-key="chatbot_input_placeholder">
-    <button id="chatbot-mic-button" class="mic-button" aria-label="Start voice input">🎤</button>
-    <button id="chatbot-send-button" data-lang-key="chatbot_send">Send</button>
     </div>
 
     <script src="script.js"></script>
